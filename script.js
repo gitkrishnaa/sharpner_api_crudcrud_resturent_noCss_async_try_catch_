@@ -18,18 +18,14 @@ document.querySelector('#id_update').addEventListener('click', () => {
 
 const id_database = localStorage.getItem('database_id');
 
-
-
-
-
 //0eadc76a30bd47a79fadcf755c1083d5
 //html input in to variable
 const body = document.querySelector('body');
 
-const item  = document.querySelector('#item');
+const item = document.querySelector('#item');
 const price = document.querySelector('#price');
 const table = document.querySelector('#table');
-const add  = document.querySelector('#btn1');
+const add = document.querySelector('#btn1');
 
 // loding function
 //get from aios
@@ -62,12 +58,11 @@ async function post_data(inp_item, inp_price, inp_table) {
   }
 }
 
-
 //delete in server
 async function delete_data(id) {
   try {
     let x = await axios.delete(
-      'https://crudcrud.com/api/' + id_database + '/order/'+id
+      'https://crudcrud.com/api/' + id_database + '/order/' + id
     );
     return x;
   } catch (e) {
@@ -111,15 +106,11 @@ async function loader(opreation) {
         button.innerText = 'Delete order';
         button.id = data1._id;
         //adding delete functionality
-        button.addEventListener("click",async ()=>{
-          main_div.style.display="none";
-          const response= await delete_data(button.id)
-          console.log(response,"item is deleted of id is", button.id)
-         
-        })
-
-
-
+        button.addEventListener('click', async () => {
+          main_div.style.display = 'none';
+          const response = await delete_data(button.id);
+          console.log(response, 'item is deleted of id is', button.id);
+        });
       } catch (e) {
         console.log(e, data1._id, 'id has some issuse');
       }
@@ -129,54 +120,23 @@ async function loader(opreation) {
   }
 }
 
-
-// 
+//
 
 // // console.log();
 body.addEventListener('DomContententLoaded', loader(get_data()));
 
-
-add.addEventListener("click",()=>{
-   
-  if(item.value==""){
-    alert("item name field is empty");
+add.addEventListener('click', () => {
+  if (item.value == '') {
+    alert('item name field is empty');
     return;
-return;
-  }
-  else if(price.value==""){
-    alert("price field is empty");
+    return;
+  } else if (price.value == '') {
+    alert('price field is empty');
     return;
   }
-  
-  loader(post_data(item.value,price.value,table.value))
-})  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  loader(post_data(item.value, price.value, table.value));
+});
 
 // function loader(){
 //   axios.get('https://crudcrud.com/api/'+id_database+'/order', {
